@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'recipes/index'
-      post 'recipes/create'
-      get '/show/:id', to: 'recipes#show'
-      delete '/destroy/:id', to: 'recipes#destroy'
+      get '/recipes', to: 'recipes#index'
+      post '/recipes', to: 'recipes#create'
+      get '/recipes/:id', to: 'recipes#show'
+      patch '/recipes/:id', to: 'recipes#update'
+      delete '/recipes/:id', to: 'recipes#destroy'
     end
   end
   root 'homepage#index'
