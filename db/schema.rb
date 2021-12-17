@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_16_051426) do
+ActiveRecord::Schema.define(version: 2021_12_17_053307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_051426) do
     t.text "instruction", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image", default: "https://raw.githubusercontent.com/OpeDada/rails-react-recipe/master/app/assets/images/recipe.jpg"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
