@@ -31,6 +31,21 @@ class Recipe extends React.Component {
   addHtmlEntities(str) {
     return String(str).replace(/&lt;/g, "<").replace(/&gt;/g, ">");
   }
+
+  render() {
+    const { recipe } = this.state;
+    let ingredientList = "No ingredients available";
+
+    if (recipe.ingredients.length > 0) {
+      ingredientList = recipe.ingredients
+        .split(",")
+        .map((ingredient, index) => (
+          <li key={index} className="list-group-item">
+            {ingredient}
+          </li>
+        ));
+    }
+  }
 }
 
 export default Recipe;
