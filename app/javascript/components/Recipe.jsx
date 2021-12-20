@@ -67,12 +67,12 @@ class Recipe extends React.Component {
                 <h5 className="mb-2">Ingredients</h5>
                 {ingredientList}
               </ul>
-              </div>
+            </div>
             <div className="col-sm-12 col-lg-7">
               <h5 className="mb-2">Preparation Instructions</h5>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: `${recipeInstruction}`
+                  __html: `${recipeInstruction}`,
                 }}
               />
             </div>
@@ -88,7 +88,6 @@ class Recipe extends React.Component {
         </div>
       </div>
     );
-  }
   }
 }
 
