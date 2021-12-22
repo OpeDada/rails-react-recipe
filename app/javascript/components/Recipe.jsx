@@ -18,7 +18,7 @@ const Recipe = () => {
   };
 
   useEffect(() => {
-    const url = `/api/v1/recipes/index`;
+    const url = `/api/v1/recipes`;
     axios
       .get(url)
       .then((res) => {
@@ -47,7 +47,7 @@ const Recipe = () => {
   }
 
   function deleteRecipe() {
-    const url = `/api/v1/destroy/${id}`;
+    const url = `/api/v1/recipes/${id}`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {

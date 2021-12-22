@@ -10,7 +10,7 @@ class Recipes extends React.Component {
   }
 
   componentDidMount() {
-    const url = "api/v1/recipes/index";
+    const url = "api/v1/recipes";
     fetch(url)
       .then((response) => {
         if (response.ok) {
