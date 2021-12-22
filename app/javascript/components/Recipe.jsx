@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const Recipe = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(undefined);
+  const navigate = useNavigate();
 
   const getCurrentRecipe = (recipes) => {
     let returnRecipe;
@@ -62,7 +63,9 @@ const Recipe = () => {
         }
         throw new Error("Network response was not ok.");
       })
-      .then(() => this.props.history.push("/recipes"))
+      .then((response) => {
+        navigate("/recipes");
+      })
       .catch((error) => console.log(error.message));
   }
 
