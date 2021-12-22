@@ -18,8 +18,6 @@ const NewRecipe = () => {
     event.preventDefault();
     const url = "/api/v1/recipes";
 
-    console.log(curRecipe);
-
     if (
       curRecipe.name.length == 0 ||
       curRecipe.ingredients.length == 0 ||
