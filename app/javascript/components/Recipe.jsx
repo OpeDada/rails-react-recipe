@@ -7,22 +7,12 @@ const Recipe = () => {
   const [recipe, setRecipe] = useState(undefined);
   const navigate = useNavigate();
 
-  const getCurrentRecipe = (recipes) => {
-    let returnRecipe;
-    recipes.forEach((element) => {
-      if (parseInt(element.id) === parseInt(id)) {
-        returnRecipe = element;
-      }
-    });
-    return returnRecipe;
-  };
-
   useEffect(() => {
-    const url = `/api/v1/recipes`;
+    const url = `/api/v1/recipes/${id}`;
     axios
       .get(url)
       .then((res) => {
-        setRecipe(getCurrentRecipe(res.data));
+        setRecipe(res.data);
       })
       .catch((error) => {
         console.log(error);
