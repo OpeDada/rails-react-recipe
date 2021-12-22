@@ -16,7 +16,7 @@ const NewRecipe = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const url = "/api/v1/recipes/create";
+    const url = "/api/v1/recipes";
 
     console.log(curRecipe);
 
@@ -49,7 +49,6 @@ const NewRecipe = () => {
         throw new Error("Network response was not ok.");
       })
       .then((response) => {
-        console.log("Response: ", response);
         navigate(`/recipe/${response.id}`);
       })
       .catch((error) => console.log(error.message));
