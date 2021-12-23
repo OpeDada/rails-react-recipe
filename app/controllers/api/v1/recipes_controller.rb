@@ -1,16 +1,13 @@
 class Api::V1::RecipesController < ApplicationController
+  before_action :set_recipe, only: %i[show update destroy]
+
   def index
-    @recipe = Recipe.all.order(created_at: :desc)
-    render json: @recipe
+    @recipes = Recipe.all.order(created_at: :desc)
+    render json: @recipes
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
-    if @recipe
-      render json: @recipe
-    else
-      render json: @recipe.errors
-    end
+    render json: @recipe
   end
 
   def create
@@ -24,25 +21,23 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
-      render json: @recipe
+      render json: @recipe, status: :ok, location: api_v1_recipe_path(@recipe)
     else
       render json: @recipe.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe&.destroy # Ruby's safe navigation operator &. avoids nil errors when calling a method.
     render json: { message: 'Recipe deleted!' }
   end
 
   private
 
-  # def set_recipe
-  #   @recipe = Recipe.find(params[:id])
-  # end
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
   def recipe_params
     params.require(:recipe).permit(:name, :ingredients, :instruction, :photo)
