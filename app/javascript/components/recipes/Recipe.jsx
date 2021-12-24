@@ -99,12 +99,12 @@ const Recipe = () => {
             </button>
           </div>
           <div className="col-sm-12 col-lg-2">
-            <Link
+            {/* <Link
               to={`/recipes/${recipe.id}/edit`}
               className="btn custom-button ml-2"
             >
               Edit Recipe
-            </Link>
+            </Link> */}
           </div>
         </div>
         <Link to="/recipes" className="btn btn-link">
