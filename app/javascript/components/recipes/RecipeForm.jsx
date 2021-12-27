@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const NewRecipe = () => {
+const NewRecipe = ({ id }) => {
   const [curRecipe, setCurRecipe] = useState({
     name: "",
     ingredients: "",
     instruction: "",
   });
   const navigate = useNavigate();
+
+  function addHtmlEntities(str) {
+    return String(str).replace(/<br>\ <br>/g, "\n");
+  }
+
+  useEffect(() => {
+    if (id) {
+      const url = `/api/v1/recipes/${id}`;
+      axios
+        .get(url)
+        .then((res) => {
+          let resData = res.data;
+          resData.instruction = addHtmlEntities(res.data.instruction);
+          setCurRecipe(resData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
 
   const onChange = (event) => {
     curRecipe[event.target.name] = event.target.value;
@@ -16,7 +37,7 @@ const NewRecipe = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const url = "/api/v1/recipes";
+    let url = "/api/v1/recipes";
 
     if (
       curRecipe.name.length == 0 ||
@@ -32,8 +53,13 @@ const NewRecipe = () => {
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
+    let postData = "POST";
+    if (id) {
+      postData = "PATCH";
+      url = `/api/v1/recipes/${id}`;
+    }
     fetch(url, {
-      method: "POST",
+      method: postData,
       headers: {
         "X-CSRF-Token": token,
         "Content-Type": "application/json",
@@ -67,6 +93,7 @@ const NewRecipe = () => {
                 name="name"
                 id="recipeName"
                 className="form-control"
+                defaultValue={curRecipe.name}
                 required
                 onChange={onChange}
               />
@@ -78,6 +105,7 @@ const NewRecipe = () => {
                 name="ingredients"
                 id="recipeIngredients"
                 className="form-control"
+                defaultValue={curRecipe.ingredients}
                 required
                 onChange={onChange}
               />
@@ -90,13 +118,20 @@ const NewRecipe = () => {
               className="form-control"
               id="instruction"
               name="instruction"
+              defaultValue={curRecipe.instruction}
               rows="5"
               required
               onChange={onChange}
             />
-            <button type="submit" className="btn custom-button mt-3">
-              Create Recipe
-            </button>
+            {id ? (
+              <button type="submit" className="btn custom-button mt-3">
+                Update Recipe
+              </button>
+            ) : (
+              <button type="submit" className="btn custom-button mt-3">
+                Create Recipe
+              </button>
+            )}
             <Link to="/recipes" className="btn btn-link mt-3">
               Back to recipes
             </Link>
