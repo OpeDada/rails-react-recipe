@@ -22,7 +22,7 @@ class Api::V1::RecipesController < ApplicationController
 
   def update
     if @recipe.update(recipe_params)
-      render json: @recipe, status: :ok, location: api_v1_recipe_path(@recipe)
+      render json: @recipe, status: :ok
     else
       render json: @recipe.errors, status: :unprocessable_entity
     end
