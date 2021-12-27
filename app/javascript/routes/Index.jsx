@@ -4,7 +4,7 @@ import Home from "../components/Home";
 import Recipes from "../components/recipes/Recipes";
 import Recipe from "../components/recipes/Recipe";
 import NewRecipe from "../components/recipes/NewRecipe";
-// import EditRecipe from "../components/recipes/EditRecipe";
+import EditRecipe from "../components/recipes/EditRecipe";
 
 export default (
   <Router>
@@ -13,7 +13,7 @@ export default (
       <Route exact path="/recipes" element={<Recipes />} />
       <Route exact path="/recipe" element={<NewRecipe />} />
       <Route exact path="/recipe/:id" element={<Recipe />} />
-      {/* <Route path="/recipes/:id/edit" exact component={EditRecipe} /> */}
+      <Route path="/recipes/:id/edit" element={<EditRecipe />} />
     </Routes>
   </Router>
 );
