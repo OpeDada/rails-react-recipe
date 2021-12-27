@@ -99,12 +99,15 @@ const Recipe = () => {
             </button>
           </div>
           <div className="col-sm-12 col-lg-2">
-            {/* <Link
-              to={`/recipes/${recipe.id}/edit`}
-              className="btn custom-button ml-2"
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => {
+                navigate(`/recipes/${recipe.id}/edit`);
+              }}
             >
               Edit Recipe
-            </Link> */}
+            </button>
           </div>
         </div>
         <Link to="/recipes" className="btn btn-link">
