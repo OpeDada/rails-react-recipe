@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-class Recipes extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      recipes: [],
-    };
-  }
+const Recipes = () => {
+  const [ recipes ] = useState([])
 
-  componentDidMount() {
+
+    useEffect(() => {
     const url = "api/v1/recipes";
     fetch(url)
       .then((response) => {
@@ -21,6 +17,8 @@ class Recipes extends React.Component {
       .then((response) => this.setState({ recipes: response }))
       .catch(() => this.props.history.push("/"));
   }
+
+
   render() {
     const { recipes } = this.state;
     const allRecipes = recipes.map((recipe, index) => (
