@@ -1,5 +1,5 @@
 import React from "react";
-import RecipeForm from "./RecipeFormCopy";
+import RecipeForm from "./RecipeForm";
 
 const NewRecipe = () => {
   return <RecipeForm />;
